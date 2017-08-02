@@ -8,7 +8,6 @@
     "dev": "webpack-dev-server --inline --hot",
     "prod": "webpack -wd"
   },
-  "proxy": "http://localhost:9000",
   "author": "",
   "license": "ISC",
   "dependencies": {
