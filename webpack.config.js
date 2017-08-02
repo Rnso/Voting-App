@@ -1,0 +1,39 @@
+const path = require('path')
+const srcDir = path.resolve(__dirname, 'src')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+module.exports = {
+    entry : `${srcDir}/index.js`,
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index.bundle.js'
+    },
+    module: {
+      loaders: [
+          {
+              test: /\.js$/,
+              loader: 'babel-loader',
+              exclude: /node_modules/
+          },
+          {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader'],
+                    publicPath: '/dist'
+                })
+            }
+      ]
+    },
+    plugins: [
+         new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+        new ExtractTextPlugin({
+            filename: 'main.css',
+            disable: false
+            //allChunks: true
+        })
+    ]
+}
