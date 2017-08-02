@@ -1,6 +1,6 @@
 {
     "presets": [
-        "env",
+        ["env",
         {
             "targets": {
                 "node": "current",
@@ -8,8 +8,7 @@
                     "last 2 versions"
                 ]
             }
-        },
-        "react",
-        "stage-2"
+        }],
+        "react"
     ]
 }
