@@ -1,9 +1,3 @@
-/*const express = require('express')
-const config = require('./config')
-const router = require('./api')
-const path = require('path')
-const bodyParser = require('body-parser')*/
-
 import config from './config'
 import express from 'express'
 import router from './api'

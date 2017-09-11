@@ -25,14 +25,16 @@ class Polls extends Component {
     componentDidMount() {
         axios.get(constants.serverUrl + `/api/getallpolls`)
             .then(res => {
-                this.state.polls = res.data
-                this.state.currentpoll = this.state.polls[0]
-                this.state.currenttitle = this.state.polls[0].title
-                this.state.currentoptions = this.state.polls[0].options
-                this.setState({ polls: res.data })
-                this.setState(this.state.currentpoll)
-                this.setState({ currenttitle: this.state.currenttitle })
-                this.setState(this.state.currentoptions)
+                if (res.data.length > 0) {
+                    this.state.polls = res.data
+                    this.state.currentpoll = this.state.polls[0]
+                    this.state.currenttitle = this.state.polls[0].title
+                    this.state.currentoptions = this.state.polls[0].options
+                    this.setState({ polls: res.data })
+                    this.setState(this.state.currentpoll)
+                    this.setState({ currenttitle: this.state.currenttitle })
+                    this.setState(this.state.currentoptions)
+                }
             })
             .catch(console.error)
     }

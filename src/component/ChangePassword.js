@@ -17,8 +17,7 @@ class ChangePassword extends Component {
         axios.post(constants.serverUrl + `/api/changepassword`, { userId, old_pwd, new_pwd })
             .then(res => {
                 if (res.data !== '') {
-                    this.setState({ showmsg: true })
-                    
+                    this.setState({ showmsg: true })                   
                 }
             })
             .catch(console.error)

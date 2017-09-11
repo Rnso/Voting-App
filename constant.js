@@ -1,4 +1,6 @@
 export const serverUrl = 'https://voting-ground.herokuapp.com'
 
-export const USERNAME = ''
-export const USERID = ''
+
+
+let session  = typeof sessionStorage['obj'] !=  'undefined' ? JSON.parse(sessionStorage.obj) : ''
+export const USERID = session._id

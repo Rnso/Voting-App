@@ -19,17 +19,21 @@ router.get('/getallpolls', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-    mdb.collection("users").insert(req.body).then((result) => {
-        res.send(result.ops)
+    mdb.collection('users').findOne({ email: req.body.email }).then(user => {
+        if (user == null) {
+            mdb.collection("users").insert(req.body).then((result) => {
+                res.send(result.ops)
+            })
+        }
+        else {
+            res.send('Already Signed up')
+        }
     })
-
 })
 
 router.post('/login', (req, res) => {
-    mdb.collection('users').update({ email: req.body.email }, { $set: { status: 'active' } }).then(result1 => {
-        mdb.collection('users').findOne({ email: req.body.email, pwd: req.body.pwd }).then(result => {
-            res.send(result)
-        })
+    mdb.collection('users').findOne({ email: req.body.email, pwd: req.body.pwd }).then(result => {
+        res.send(result)
     })
 })
 
@@ -61,7 +65,7 @@ router.post('/deletePolls', (req, res) => {
 
 router.post('/createpolls', (req, res) => {
     mdb.collection("polls").insert({ title: req.body.title, options: req.body.options }).then((result) => {
-        mdb.collection("users").update({ _id: ObjectID(req.body.userId)}, { $push: { polls_id: ObjectID(result.ops[0]._id)}}).then(result1 => {
+        mdb.collection("users").update({ _id: ObjectID(req.body.userId) }, { $push: { polls_id: ObjectID(result.ops[0]._id) } }).then(result1 => {
             res.send(result1.ops)
         })
     })
